@@ -26,7 +26,7 @@
 
 ## Lisans
 
-Bu proje, [GNU General Public License v2.0](LICENSE) altında lisanslanmıştır.
+Bu proje, [Mozilla Public License 2.0](LICENSE) altında lisanslanmıştır.
 
 ## Katkıda Bulunma
 

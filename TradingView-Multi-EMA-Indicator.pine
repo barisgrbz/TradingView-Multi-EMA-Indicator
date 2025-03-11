@@ -1,0 +1,199 @@
+//@barisgrbz
+//@version=6
+
+// This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
+// If a copy of the MPL was not distributed with this file, You can obtain one at https://mozilla.org/MPL/2.0/.
+// https://github.com/barisgrbz/TradingView-Multi-EMA-Indicator
+
+indicator("Multi EMA Indicator with Per EMA Smoothing", shorttitle="Multi EMA + Smooth (Per EMA)", overlay=true, timeframe="", timeframe_gaps=true)
+
+
+src = input(close, title="Source", display=display.none)
+
+// ================================
+
+// -------------------------------
+
+ema1_enabled = input.bool(true, title="EMA1", inline="EMA1", display=display.none)
+ema1_length  = input.int(9, minval=1, title="Length", inline="EMA1", display=display.none)
+ema1_offset  = input.int(0, title="Offset", minval=-500, maxval=500, inline="EMA1", display=display.none)
+ema1_color   = input.color(color.blue, title="Color", inline="EMA1", display=display.none)
+
+
+ema2_enabled = input.bool(false, title="EMA2", inline="EMA2", display=display.none)
+ema2_length  = input.int(21, minval=1, title="Length", inline="EMA2", display=display.none)
+ema2_offset  = input.int(0, title="Offset", minval=-500, maxval=500, inline="EMA2", display=display.none)
+ema2_color   = input.color(color.red, title="Color", inline="EMA2", display=display.none)
+
+
+ema3_enabled = input.bool(false, title="EMA3", inline="EMA3", display=display.none)
+ema3_length  = input.int(50, minval=1, title="Length", inline="EMA3", display=display.none)
+ema3_offset  = input.int(0, title="Offset", minval=-500, maxval=500, inline="EMA3", display=display.none)
+ema3_color   = input.color(color.orange, title="Color", inline="EMA3", display=display.none)
+
+
+ema4_enabled = input.bool(false, title="EMA4", inline="EMA4", display=display.none)
+ema4_length  = input.int(100, minval=1, title="Length", inline="EMA4", display=display.none)
+ema4_offset  = input.int(0, title="Offset", minval=-500, maxval=500, inline="EMA4", display=display.none)
+ema4_color   = input.color(color.purple, title="Color", inline="EMA4", display=display.none)
+
+
+ema5_enabled = input.bool(false, title="EMA5", inline="EMA5", display=display.none)
+ema5_length  = input.int(200, minval=1, title="Length", inline="EMA5", display=display.none)
+ema5_offset  = input.int(0, title="Offset", minval=-500, maxval=500, inline="EMA5", display=display.none)
+ema5_color   = input.color(color.green, title="Color", inline="EMA5", display=display.none)
+
+
+ema6_enabled = input.bool(false, title="EMA6", inline="EMA6", display=display.none)
+ema6_length  = input.int(14, minval=1, title="Length", inline="EMA6", display=display.none)
+ema6_offset  = input.int(0, title="Offset", minval=-500, maxval=500, inline="EMA6", display=display.none)
+ema6_color   = input.color(color.yellow, title="Color", inline="EMA6", display=display.none)
+
+
+ema7_enabled = input.bool(false, title="EMA7", inline="EMA7", display=display.none)
+ema7_length  = input.int(34, minval=1, title="Length", inline="EMA7", display=display.none)
+ema7_offset  = input.int(0, title="Offset", minval=-500, maxval=500, inline="EMA7", display=display.none)
+ema7_color   = input.color(color.aqua, title="Color", inline="EMA7", display=display.none)
+
+
+ema8_enabled = input.bool(false, title="EMA8", inline="EMA8", display=display.none)
+ema8_length  = input.int(55, minval=1, title="Length", inline="EMA8", display=display.none)
+ema8_offset  = input.int(0, title="Offset", minval=-500, maxval=500, inline="EMA8", display=display.none)
+ema8_color   = input.color(color.fuchsia, title="Color", inline="EMA8", display=display.none)
+
+
+ema1_val = ema1_enabled ? ta.ema(src, ema1_length) : na
+ema2_val = ema2_enabled ? ta.ema(src, ema2_length) : na
+ema3_val = ema3_enabled ? ta.ema(src, ema3_length) : na
+ema4_val = ema4_enabled ? ta.ema(src, ema4_length) : na
+ema5_val = ema5_enabled ? ta.ema(src, ema5_length) : na
+ema6_val = ema6_enabled ? ta.ema(src, ema6_length) : na
+ema7_val = ema7_enabled ? ta.ema(src, ema7_length) : na
+ema8_val = ema8_enabled ? ta.ema(src, ema8_length) : na
+
+plot(ema1_val, title="EMA 1", color=ema1_color, offset=ema1_offset)
+plot(ema2_val, title="EMA 2", color=ema2_color, offset=ema2_offset)
+plot(ema3_val, title="EMA 3", color=ema3_color, offset=ema3_offset)
+plot(ema4_val, title="EMA 4", color=ema4_color, offset=ema4_offset)
+plot(ema5_val, title="EMA 5", color=ema5_color, offset=ema5_offset)
+plot(ema6_val, title="EMA 6", color=ema6_color, offset=ema6_offset)
+plot(ema7_val, title="EMA 7", color=ema7_color, offset=ema7_offset)
+plot(ema8_val, title="EMA 8", color=ema8_color, offset=ema8_offset)
+
+
+ma(source, length, MAtype) =>
+    switch MAtype
+        "SMA"        => ta.sma(source, length)
+        "SMA+BB"     => ta.sma(source, length)
+        "EMA"        => ta.ema(source, length)
+        "SMMA (RMA)" => ta.rma(source, length)
+        "WMA"        => ta.wma(source, length)
+        "VWMA"       => ta.vwma(source, length)
+        => na
+
+// ========================================
+
+// ========================================
+
+
+smoothingTypeEMA1   = input.string("None", title="Type", options=["None", "SMA", "SMA+BB", "EMA", "SMMA (RMA)", "WMA", "VWMA"], group="Smoothing EMA1", inline="EMA1Smooth", display=display.none)
+smoothingBBMultEMA1 = input.float(2.0, title="BB StdDev", minval=0.001, maxval=50, step=0.5, group="Smoothing EMA1", inline="EMA1Smooth", display=display.none)
+smoothingLengthEMA1 = ema1_length
+enableSmoothingEMA1 = smoothingTypeEMA1 != "None"
+isBBEMA1            = smoothingTypeEMA1 == "SMA+BB"
+smoothingEMA1       = enableSmoothingEMA1 ? ma(ema1_val, smoothingLengthEMA1, smoothingTypeEMA1) : na
+smoothingStDevEMA1  = isBBEMA1 ? ta.stdev(ema1_val, smoothingLengthEMA1) * smoothingBBMultEMA1 : na
+plot(smoothingEMA1, title="EMA 1 - Smoothed", color=color.yellow, display=enableSmoothingEMA1 ? display.all : display.none)
+bbUpperBand1 = plot(smoothingEMA1 + smoothingStDevEMA1, title="EMA 1 - Upper BB", color=color.green, display=isBBEMA1 ? display.all : display.none)
+bbLowerBand1 = plot(smoothingEMA1 - smoothingStDevEMA1, title="EMA 1 - Lower BB", color=color.green, display=isBBEMA1 ? display.all : display.none)
+fill(bbUpperBand1, bbLowerBand1, color=isBBEMA1 ? color.new(color.green, 90) : na, title="EMA 1 - BB Fill", display=isBBEMA1 ? display.all : display.none)
+
+smoothingTypeEMA2   = input.string("None", title="Type", options=["None", "SMA", "SMA+BB", "EMA", "SMMA (RMA)", "WMA", "VWMA"], group="Smoothing EMA2", inline="EMA2Smooth", display=display.none)
+smoothingBBMultEMA2 = input.float(2.0, title="BB StdDev", minval=0.001, maxval=50, step=0.5, group="Smoothing EMA2", inline="EMA2Smooth", display=display.none)
+smoothingLengthEMA2 = ema2_length
+enableSmoothingEMA2 = smoothingTypeEMA2 != "None"
+isBBEMA2            = smoothingTypeEMA2 == "SMA+BB"
+smoothingEMA2       = enableSmoothingEMA2 ? ma(ema2_val, smoothingLengthEMA2, smoothingTypeEMA2) : na
+smoothingStDevEMA2  = isBBEMA2 ? ta.stdev(ema2_val, smoothingLengthEMA2) * smoothingBBMultEMA2 : na
+plot(smoothingEMA2, title="EMA 2 - Smoothed", color=color.yellow, display=enableSmoothingEMA2 ? display.all : display.none)
+bbUpperBand2 = plot(smoothingEMA2 + smoothingStDevEMA2, title="EMA 2 - Upper BB", color=color.green, display=isBBEMA2 ? display.all : display.none)
+bbLowerBand2 = plot(smoothingEMA2 - smoothingStDevEMA2, title="EMA 2 - Lower BB", color=color.green, display=isBBEMA2 ? display.all : display.none)
+fill(bbUpperBand2, bbLowerBand2, color=isBBEMA2 ? color.new(color.green, 90) : na, title="EMA 2 - BB Fill", display=isBBEMA2 ? display.all : display.none)
+
+
+smoothingTypeEMA3   = input.string("None", title="Type", options=["None", "SMA", "SMA+BB", "EMA", "SMMA (RMA)", "WMA", "VWMA"], group="Smoothing EMA3", inline="EMA3Smooth", display=display.none)
+smoothingBBMultEMA3 = input.float(2.0, title="BB StdDev", minval=0.001, maxval=50, step=0.5, group="Smoothing EMA3", inline="EMA3Smooth", display=display.none)
+smoothingLengthEMA3 = ema3_length
+enableSmoothingEMA3 = smoothingTypeEMA3 != "None"
+isBBEMA3            = smoothingTypeEMA3 == "SMA+BB"
+smoothingEMA3       = enableSmoothingEMA3 ? ma(ema3_val, smoothingLengthEMA3, smoothingTypeEMA3) : na
+smoothingStDevEMA3  = isBBEMA3 ? ta.stdev(ema3_val, smoothingLengthEMA3) * smoothingBBMultEMA3 : na
+plot(smoothingEMA3, title="EMA 3 - Smoothed", color=color.yellow, display=enableSmoothingEMA3 ? display.all : display.none)
+bbUpperBand3 = plot(smoothingEMA3 + smoothingStDevEMA3, title="EMA 3 - Upper BB", color=color.green, display=isBBEMA3 ? display.all : display.none)
+bbLowerBand3 = plot(smoothingEMA3 - smoothingStDevEMA3, title="EMA 3 - Lower BB", color=color.green, display=isBBEMA3 ? display.all : display.none)
+fill(bbUpperBand3, bbLowerBand3, color=isBBEMA3 ? color.new(color.green, 90) : na, title="EMA 3 - BB Fill", display=isBBEMA3 ? display.all : display.none)
+
+
+smoothingTypeEMA4   = input.string("None", title="Type", options=["None", "SMA", "SMA+BB", "EMA", "SMMA (RMA)", "WMA", "VWMA"], group="Smoothing EMA4", inline="EMA4Smooth", display=display.none)
+smoothingBBMultEMA4 = input.float(2.0, title="BB StdDev", minval=0.001, maxval=50, step=0.5, group="Smoothing EMA4", inline="EMA4Smooth", display=display.none)
+smoothingLengthEMA4 = ema4_length
+enableSmoothingEMA4 = smoothingTypeEMA4 != "None"
+isBBEMA4            = smoothingTypeEMA4 == "SMA+BB"
+smoothingEMA4       = enableSmoothingEMA4 ? ma(ema4_val, smoothingLengthEMA4, smoothingTypeEMA4) : na
+smoothingStDevEMA4  = isBBEMA4 ? ta.stdev(ema4_val, smoothingLengthEMA4) * smoothingBBMultEMA4 : na
+plot(smoothingEMA4, title="EMA 4 - Smoothed", color=color.yellow, display=enableSmoothingEMA4 ? display.all : display.none)
+bbUpperBand4 = plot(smoothingEMA4 + smoothingStDevEMA4, title="EMA 4 - Upper BB", color=color.green, display=isBBEMA4 ? display.all : display.none)
+bbLowerBand4 = plot(smoothingEMA4 - smoothingStDevEMA4, title="EMA 4 - Lower BB", color=color.green, display=isBBEMA4 ? display.all : display.none)
+fill(bbUpperBand4, bbLowerBand4, color=isBBEMA4 ? color.new(color.green, 90) : na, title="EMA 4 - BB Fill", display=isBBEMA4 ? display.all : display.none)
+
+
+smoothingTypeEMA5   = input.string("None", title="Type", options=["None", "SMA", "SMA+BB", "EMA", "SMMA (RMA)", "WMA", "VWMA"], group="Smoothing EMA5", inline="EMA5Smooth", display=display.none)
+smoothingBBMultEMA5 = input.float(2.0, title="BB StdDev", minval=0.001, maxval=50, step=0.5, group="Smoothing EMA5", inline="EMA5Smooth", display=display.none)
+smoothingLengthEMA5 = ema5_length
+enableSmoothingEMA5 = smoothingTypeEMA5 != "None"
+isBBEMA5            = smoothingTypeEMA5 == "SMA+BB"
+smoothingEMA5       = enableSmoothingEMA5 ? ma(ema5_val, smoothingLengthEMA5, smoothingTypeEMA5) : na
+smoothingStDevEMA5  = isBBEMA5 ? ta.stdev(ema5_val, smoothingLengthEMA5) * smoothingBBMultEMA5 : na
+plot(smoothingEMA5, title="EMA 5 - Smoothed", color=color.yellow, display=enableSmoothingEMA5 ? display.all : display.none)
+bbUpperBand5 = plot(smoothingEMA5 + smoothingStDevEMA5, title="EMA 5 - Upper BB", color=color.green, display=isBBEMA5 ? display.all : display.none)
+bbLowerBand5 = plot(smoothingEMA5 - smoothingStDevEMA5, title="EMA 5 - Lower BB", color=color.green, display=isBBEMA5 ? display.all : display.none)
+fill(bbUpperBand5, bbLowerBand5, color=isBBEMA5 ? color.new(color.green, 90) : na, title="EMA 5 - BB Fill", display=isBBEMA5 ? display.all : display.none)
+
+
+smoothingTypeEMA6   = input.string("None", title="Type", options=["None", "SMA", "SMA+BB", "EMA", "SMMA (RMA)", "WMA", "VWMA"], group="Smoothing EMA6", inline="EMA6Smooth", display=display.none)
+smoothingBBMultEMA6 = input.float(2.0, title="BB StdDev", minval=0.001, maxval=50, step=0.5, group="Smoothing EMA6", inline="EMA6Smooth", display=display.none)
+smoothingLengthEMA6 = ema6_length
+enableSmoothingEMA6 = smoothingTypeEMA6 != "None"
+isBBEMA6            = smoothingTypeEMA6 == "SMA+BB"
+smoothingEMA6       = enableSmoothingEMA6 ? ma(ema6_val, smoothingLengthEMA6, smoothingTypeEMA6) : na
+smoothingStDevEMA6  = isBBEMA6 ? ta.stdev(ema6_val, smoothingLengthEMA6) * smoothingBBMultEMA6 : na
+plot(smoothingEMA6, title="EMA 6 - Smoothed", color=color.yellow, display=enableSmoothingEMA6 ? display.all : display.none)
+bbUpperBand6 = plot(smoothingEMA6 + smoothingStDevEMA6, title="EMA 6 - Upper BB", color=color.green, display=isBBEMA6 ? display.all : display.none)
+bbLowerBand6 = plot(smoothingEMA6 - smoothingStDevEMA6, title="EMA 6 - Lower BB", color=color.green, display=isBBEMA6 ? display.all : display.none)
+fill(bbUpperBand6, bbLowerBand6, color=isBBEMA6 ? color.new(color.green, 90) : na, title="EMA 6 - BB Fill", display=isBBEMA6 ? display.all : display.none)
+
+
+smoothingTypeEMA7   = input.string("None", title="Type", options=["None", "SMA", "SMA+BB", "EMA", "SMMA (RMA)", "WMA", "VWMA"], group="Smoothing EMA7", inline="EMA7Smooth", display=display.none)
+smoothingBBMultEMA7 = input.float(2.0, title="BB StdDev", minval=0.001, maxval=50, step=0.5, group="Smoothing EMA7", inline="EMA7Smooth", display=display.none)
+smoothingLengthEMA7 = ema7_length
+enableSmoothingEMA7 = smoothingTypeEMA7 != "None"
+isBBEMA7            = smoothingTypeEMA7 == "SMA+BB"
+smoothingEMA7       = enableSmoothingEMA7 ? ma(ema7_val, smoothingLengthEMA7, smoothingTypeEMA7) : na
+smoothingStDevEMA7  = isBBEMA7 ? ta.stdev(ema7_val, smoothingLengthEMA7) * smoothingBBMultEMA7 : na
+plot(smoothingEMA7, title="EMA 7 - Smoothed", color=color.yellow, display=enableSmoothingEMA7 ? display.all : display.none)
+bbUpperBand7 = plot(smoothingEMA7 + smoothingStDevEMA7, title="EMA 7 - Upper BB", color=color.green, display=isBBEMA7 ? display.all : display.none)
+bbLowerBand7 = plot(smoothingEMA7 - smoothingStDevEMA7, title="EMA 7 - Lower BB", color=color.green, display=isBBEMA7 ? display.all : display.none)
+fill(bbUpperBand7, bbLowerBand7, color=isBBEMA7 ? color.new(color.green, 90) : na, title="EMA 7 - BB Fill", display=isBBEMA7 ? display.all : display.none)
+
+
+smoothingTypeEMA8   = input.string("None", title="Type", options=["None", "SMA", "SMA+BB", "EMA", "SMMA (RMA)", "WMA", "VWMA"], group="Smoothing EMA8", inline="EMA8Smooth", display=display.none)
+smoothingBBMultEMA8 = input.float(2.0, title="BB StdDev", minval=0.001, maxval=50, step=0.5, group="Smoothing EMA8", inline="EMA8Smooth", display=display.none)
+smoothingLengthEMA8 = ema8_length
+enableSmoothingEMA8 = smoothingTypeEMA8 != "None"
+isBBEMA8            = smoothingTypeEMA8 == "SMA+BB"
+smoothingEMA8       = enableSmoothingEMA8 ? ma(ema8_val, smoothingLengthEMA8, smoothingTypeEMA8) : na
+smoothingStDevEMA8  = isBBEMA8 ? ta.stdev(ema8_val, smoothingLengthEMA8) * smoothingBBMultEMA8 : na
+plot(smoothingEMA8, title="EMA 8 - Smoothed", color=color.yellow, display=enableSmoothingEMA8 ? display.all : display.none)
+bbUpperBand8 = plot(smoothingEMA8 + smoothingStDevEMA8, title="EMA 8 - Upper BB", color=color.green, display=isBBEMA8 ? display.all : display.none)
+bbLowerBand8 = plot(smoothingEMA8 - smoothingStDevEMA8, title="EMA 8 - Lower BB", color=color.green, display=isBBEMA8 ? display.all : display.none)
+fill(bbUpperBand8, bbLowerBand8, color=isBBEMA8 ? color.new(color.green, 90) : na, title="EMA 8 - BB Fill", display=isBBEMA8 ? display.all : display.none)

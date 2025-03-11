@@ -6,7 +6,7 @@
 
 
 
-indicator("Multi EMA Indicator with Per EMA Smoothing", shorttitle="Multi EMA + Smooth (Per EMA)", overlay=true, timeframe="", timeframe_gaps=true)
+indicator("Multi EMA with Per EMA Smoothing", shorttitle="Multi EMA + Smooth (Per EMA)", overlay=true, timeframe="", timeframe_gaps=true)
 
 
 src = input(close, title="Source", display=display.none)

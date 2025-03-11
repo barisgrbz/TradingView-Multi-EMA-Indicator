@@ -30,7 +30,7 @@ Bu proje, [GNU General Public License v2.0](LICENSE) altında lisanslanmıştır
 
 ## Katkıda Bulunma
 
-Katkılarınız, geri bildirimleriniz ve hata raporlarınız memnuniyetle karşılanmaktadır. Lütfen [issue](https://github.com/[barisgrbz]/TradingView-Multi-EMA-Indicator/issues) sayfasından bildirin veya doğrudan pull request gönderin.
+Katkılarınız, geri bildirimleriniz ve hata raporlarınız memnuniyetle karşılanmaktadır. Lütfen [issue](https://github.com/barisgrbz/TradingView-Multi-EMA-Indicator/issues) sayfasından bildirin veya doğrudan pull request gönderin.
 
 
   Bu script, TradingView’ın yerleşik EMA göstergesinin modifiye edilmiş versiyonu olarak oluşturulmuştur.

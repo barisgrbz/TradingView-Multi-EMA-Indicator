@@ -1,9 +1,10 @@
-//@barisgrbz
+
+// © barisgurbuz
+// https://github.com/barisgrbz/TradingView-Multi-EMA-Indicator
+// This Pine Script™ code is subject to the terms of the Mozilla Public License 2.0 at https://mozilla.org/MPL/2.0/
 //@version=6
 
-// This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
-// If a copy of the MPL was not distributed with this file, You can obtain one at https://mozilla.org/MPL/2.0/.
-// https://github.com/barisgrbz/TradingView-Multi-EMA-Indicator
+
 
 indicator("Multi EMA Indicator with Per EMA Smoothing", shorttitle="Multi EMA + Smooth (Per EMA)", overlay=true, timeframe="", timeframe_gaps=true)
 
